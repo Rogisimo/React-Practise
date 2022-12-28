@@ -11,6 +11,36 @@ const Person = (props) =>{
   )
 }
 
+function UserGreeting(props){
+  return "Hello " + props.name;
+}
+function GuestGreeting(props){
+  return "Hello " + props.name;
+}
+function Greeting(props){
+  const isLoggedIn = props.isLoggedIn;
+  if(isLoggedIn){
+    return <UserGreeting name="John"/>
+  }
+  else{
+    return <GuestGreeting name="Guest"/>
+  }
+}
+
+function NumberList(props){
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+  <li key={number.toString()}>
+    {number}
+  </li>
+  )
+  return(
+    <ul>{listItems}</ul>
+  )
+}
+
+
+
 const App = () => {
   const name = "Spongebob"
   const [counter, setCounter] = useState(0); //React hook
@@ -37,6 +67,12 @@ const App = () => {
       <button onClick={() => {setCounter((prevCount) => prevCount-1)}}>-</button>
       <h1>{counter}</h1>
       <button onClick={() => {setCounter((prevCount) => prevCount+1)}}>+</button>
+      {/* Conditional rendering */}
+      <p>Conditional rendering</p>
+      <Greeting isLoggedIn={true}/>
+      {/* Lists and keys */}
+      <NumberList numbers={[1,2,3,4,5]}/>
+
     </div>
   );
 }
